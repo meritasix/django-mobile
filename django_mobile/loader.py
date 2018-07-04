@@ -12,6 +12,9 @@ class Loader(BaseLoader):
     _template_source_loaders = None
 
     def get_contents(self, origin):
+        if not origin.loader:
+            # compatibility with django_debug_toolbar, which does not pass the loader option.
+            raise TemplateDoesNotExist("Origin passed to get_contents has no loader assigned, so we can't find the template.")
         return origin.loader.get_contents(origin)
 
     def get_template_sources(self, template_name, template_dirs=None):

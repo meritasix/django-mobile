@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import django
 from django.conf import settings as django_settings
 
 CACHE_LOADER_NAME = 'django_mobile.loader.CachedLoader'
@@ -30,7 +31,11 @@ class defaults(object):
     FLAVOURS_COOKIE_HTTPONLY = False
     FLAVOURS_SESSION_KEY = u'flavour'
     FLAVOURS_TEMPLATE_LOADERS = []
-    for loader in django_settings.TEMPLATE_LOADERS:
+    if django.VERSION[0] < 2 and django.VERSION[1] < 8 :
+        TEMPLATES = django_settings.TEMPLATE_LOADERS
+    else:
+        TEMPLATES = django_settings.TEMPLATES[0]['OPTIONS']['loaders']
+    for loader in TEMPLATES:
         if isinstance(loader, (tuple, list)) and loader[0] == CACHE_LOADER_NAME:
             for cached_loader in loader[1]:
                 if cached_loader != DJANGO_MOBILE_LOADER:

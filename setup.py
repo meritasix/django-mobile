@@ -72,12 +72,12 @@ else:
 setup(
     name='django-mobile',
     version=get_version('django_mobile'),
-    url='https://github.com/gregmuellegger/django-mobile',
+    url='https://github.com/meritasix/django-mobile',
     license='BSD',
     description=u'Detect mobile browsers and serve different template flavours to them.',
     long_description=long_description,
     author=get_author('django_mobile'),
-    author_email='gregor@muellegger.de',
+    author_email='',
     keywords='django,mobile',
     classifiers=[
         'Development Status :: 4 - Beta',
